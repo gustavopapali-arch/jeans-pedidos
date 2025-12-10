@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Enviar Pedido</h2>
+<form method="POST" action="/enviar">
+    Nome: <input name="nome"><br><br>
+    Cor: <select name="cor"><option>Preta</option><option>Branca</option></select><br><br>
+    Quantidade: <input name="quantidade" type="number"><br><br>
+    Tamanho:
+    <select name="tamanho">{% for t in tamanhos %}<option>{{ t }}</option>{% endfor %}</select><br><br>
+    <button type="submit">Enviar</button>
+</form>
+</body>
+</html>

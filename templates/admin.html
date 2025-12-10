@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Área da Empresa</h2>
+<ul>
+{% for p in pedidos %}
+<li>{{ p }} - <a href="/download/{{ p }}">Baixar</a></li>
+{% endfor %}
+</ul>
+</body>
+</html>

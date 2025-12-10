@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - Empresa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>PAINEL ADMINISTRATIVO</h1>
+    </header>
+    
+    <main>
+        <div class="container container-wide">
+            <h2>Resumo de Pedidos</h2>
+            
+            <div class="resumo-info">
+                <div class="info-card">
+                    <span class="info-numero">{{ total_pedidos }}</span>
+                    <span class="info-label">Total de Pedidos</span>
+                </div>
+                <div class="info-card">
+                    <span class="info-numero">{{ total_azul }}</span>
+                    <span class="info-label">Total Peças Azuis</span>
+                </div>
+                <div class="info-card">
+                    <span class="info-numero">{{ total_preta }}</span>
+                    <span class="info-label">Total Peças Pretas</span>
+                </div>
+            </div>
+            
+            <div class="btn-container" style="margin-bottom: 30px;">
+                <a href="{{ url_for('download_excel') }}" class="btn-download">Download Excel</a>
+            </div>
+            
+            <h3>Lista de Pedidos</h3>
+            {% if pedidos %}
+            <div class="lista-pedidos">
+                {% for pedido in pedidos %}
+                <div class="pedido-card">
+                    <div class="pedido-header">
+                        <span class="pedido-nome">{{ pedido.nome }}</span>
+                        <span class="pedido-data">{{ pedido.timestamp }}</span>
+                    </div>
+                    <div class="pedido-resumo">
+                        <span>Azul: {{ pedido.total_azul }}</span>
+                        <span>Preta: {{ pedido.total_preta }}</span>
+                        <span class="pedido-total">Total: {{ pedido.total_geral }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="sem-pedidos">Nenhum pedido realizado ainda.</p>
+            {% endif %}
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 - Sistema de Pedidos de Calças Jeans</p>
+    </footer>
+</body>
+</html>

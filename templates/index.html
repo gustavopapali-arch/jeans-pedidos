@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Calças Jeans</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>PEDIDO DE CALÇAS JEANS</h1>
+    </header>
+
+    <main>
+        <div class="container">
+            {% if request.args.get('sucesso') == '1' %}
+            <div class="alert-success">
+                Pedido enviado com sucesso!
+            </div>
+            {% endif %}
+
+            <h2>Formulário de Pedido</h2>
+            
+            <form action="{{ url_for('enviar_pedido') }}" method="POST">
+                <div class="form-group">
+                    <label for="nome">Nome do Cliente: <span class="required">*</span></label>
+                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tamanho</th>
+                                <th>Jeans Azul</th>
+                                <th>Jeans Preta</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for tamanho in tamanhos %}
+                            <tr>
+                                <td class="tamanho">{{ tamanho }}</td>
+                                <td>
+                                    <input type="number" name="azul_{{ tamanho }}" value="0" min="0" class="quantidade-input">
+                                </td>
+                                <td>
+                                    <input type="number" name="preta_{{ tamanho }}" value="0" min="0" class="quantidade-input">
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="btn-container">
+                    <button type="submit" class="btn-enviar">Enviar Pedido</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - Sistema de Pedidos de Calças Jeans</p>
+    </footer>
+</body>
+</html>

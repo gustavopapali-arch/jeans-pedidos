@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MINHA EMPRESA - Pedido de Calças Jeans</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>MINHA EMPRESA</h1>
+    </header>
+    
+    <main>
+        <div class="container">
+            <h2>Pedido de Calças Jeans</h2>
+            
+            {% if erro %}
+            <div class="erro">
+                {{ erro }}
+            </div>
+            {% endif %}
+            
+            <form action="{{ url_for('enviar_pedido') }}" method="POST">
+                <div class="form-group">
+                    <label for="nome_responsavel">Nome do responsável pelo pedido: <span class="required">*</span></label>
+                    <input type="text" id="nome_responsavel" name="nome_responsavel" required placeholder="Digite seu nome completo">
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tamanho</th>
+                                <th>Jeans Azul</th>
+                                <th>Jeans Preto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for tamanho in tamanhos %}
+                            <tr>
+                                <td class="tamanho">{{ tamanho }}</td>
+                                <td>
+                                    <input type="number" name="azul_{{ tamanho }}" min="0" value="0" class="quantidade-input">
+                                </td>
+                                <td>
+                                    <input type="number" name="preto_{{ tamanho }}" min="0" value="0" class="quantidade-input">
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="btn-container">
+                    <button type="submit" class="btn-enviar">Enviar Pedido</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 MINHA EMPRESA - Todos os direitos reservados</p>
+    </footer>
+</body>
+</html>
